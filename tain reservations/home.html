@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Ticket Booking</title>
+    <style>
+        /* CSS styles for the ticket booking page */
+        /* You can customize the styles as per your requirements */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        select {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .error-message {
+            color: #ff0000;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Train Ticket Booking</h1>
+        <div id="bookingPage">
+            <form action=booking_ticket.php method="post">
+                <input type="text" name="name" id="name" placeholder="Your Name" required>
+                <input type="email" name="email" id="email" placeholder="Your Email" required>
+                <input type="text" name="from" id="from" placeholder="From" required>
+                <input type="text" name="to" id="to" placeholder="To" required>
+                <input type="date" name="date" id="date" placeholder="Date of Journey" required>
+                <select name="class" id="class" required>
+                    <option value="" disabled selected>Select Class</option>
+                    <option value="Sleeper">Sleeper Class</option>
+                    <option value="Three-tier AC">Three-tier AC</option>
+                    <option value="Two-tier AC">Two-tier AC</option>
+                    <option value="One-tier AC">One-tier AC</option>
+                </select>
+                <select name="berth" id="berth" required>
+                    <option value="" disabled selected>Select Berth</option>
+                    <option value="Lower">Lower</option>
+                    <option value="Middle">Middle</option>
+                    <option value="Upper">Upper</option>
+                    <option value="Side Lower">Side Lower</option>
+                    <option value="Side Upper">Side Upper</option>
+                </select>
+                <input type="submit" value="Book Ticket">
+            </form>
+            <div id="ticketInfo" style="display: none;">
+                <!-- Ticket information will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript code for handling form submission and displaying ticket information
+        document.getElementById('bookingForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Here you would typically make an AJAX request to check availability and book the ticket
+            // For demonstration purpose, we'll just display the ticket information
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const from = document.getElementById('from').value;
+            const to = document.getElementById('to').value;
+            const date = document.getElementById('date').value;
+            const ticketClass = document.getElementById('class').value;
+            const berth = document.getElementById('berth').value;
+
+            // Simulate ticket booking by displaying ticket information
+            const ticketInfo = `
+                <h2>Ticket Information</h2>
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>From:</strong> ${from}</p>
+                <p><strong>To:</strong> ${to}</p>
+                <p><strong>Date of Journey:</strong> ${date}</p>
+                <p><strong>Class:</strong> ${ticketClass}</p>
+                <p><strong>Berth:</strong> ${berth}</p>
+                <p><strong>Seat Number:</strong> ${getRandomSeat()}</p>
+                <p><strong>Coach:</strong> ${getRandomCoach()}</p>
+                <p><strong>Price:</strong> ₹${getRandomPrice()}</p>
+                <!-- Add more ticket details as needed -->
+            `;
+
+            // Display the ticket information
+            document.getElementById('ticketInfo').innerHTML = ticketInfo;
+            document.getElementById('ticketInfo').style.display = 'block';
+        });
+
+        function getRandomSeat() {
+            return Math.floor(Math.random() * 100) + 1;
+        }
+
+        function getRandomCoach() {
+            const coaches = ['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8', 'S9', 'S10', 'S11'];
+            return coaches[Math.floor(Math.random() * coaches.length)];
+        }
+
+        function getRandomPrice() {
+            return (Math.floor(Math.random() * 100) + 50).toFixed(2);
+        }
+    </script>
+</body>
+</html>
